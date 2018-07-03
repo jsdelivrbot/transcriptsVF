@@ -11,6 +11,14 @@ var echoAgent = new Agent({
 	accessToken: 'c598d91bf5184acba1dd5750782d557b',
 	accessTokenSecret: '7b861610c4e51db0'
 });
+var isBotReady = 0;
+var bearer = "";
+var dialogs = [];
+
+setTimeout(function(){
+	bearer = echoAgent.transport.configuration.token;
+}, 10000);
+
 
 
 
