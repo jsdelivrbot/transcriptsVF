@@ -12,7 +12,7 @@
   "dependencies": {
     "node-agent-sdk": "^0.3.1",
     "body-parser": "^1.15.1",
-    "ejs": "2.4.1",
+    "ejs": "2.5.5",
     "express": "4.13.3",
     "request": "^2.79.0"
   },
