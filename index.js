@@ -4,6 +4,7 @@ var https = require('https');
 
 
 
+
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
 	accountId: '13099967',
@@ -41,37 +42,44 @@ function updateDialogs(){
 	var conversationsPartial = 0;
 	var offset = 0;
 	
-	var body = '{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}';	
+	var body = '{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}';
+	var oauth = "Bearer " + bearer;
+	
 		  
 	 
 	 
 	function tryUntilSuccess(offset, callback) {
+		var url = "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/search?offset=" + offset + "&limit=100";
 	 
-	 	$.ajax({
-                              url: "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/search?offset=" + offset + "&limit=100",
-                              method: "POST",
-                              jsonp: "cb",
-                              jsonpCallback: "domainCallback",
-                              cache: true,
-                              contentType: "application/json",
-                              data: body,
-                              success: function success(data) {
+	 	request.post({
+			url: url,
+			json: true,
+			body: body,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': oauth
+			}
+			function (e, r, b) {
+				if(e){
+					tryUntilSuccess(offset, callback);
+				} else{
+
 				      
 				      if(offset == 0){
-					      conversationsToDownload = data._metadata.count;    
+					      conversationsToDownload = b._metadata.count;    
 				      }
 				      
-				      conversationsPartial = conversationsPartial + data.conversationHistoryRecords.length;
+				      conversationsPartial = conversationsPartial + b.conversationHistoryRecords.length;
 				      if(conversationsPartial < conversationsToDownload){
 					      offset = conversationsPartial;
-					      dialogs = dialogs.concat(data.conversationHistoryRecords);
+					      dialogs = dialogs.concat(b.conversationHistoryRecords);
 					      console.log ("adding conversations...");
 					      console.log(offset + " of --> " + conversationsToDownload);
 					      tryUntilSuccess(offset, callback);
 				      }
 				      else{
-					      console.log("last bucket: " + data.conversationHistoryRecords.length);
-					      dialogs = dialogs.concat(data.conversationHistoryRecords);
+					      console.log("last bucket: " + b.conversationHistoryRecords.length);
+					      dialogs = dialogs.concat(b.conversationHistoryRecords);
 					      console.log(answer.length);
 					      before = now + 1;
 					      setTimeout(function(){
@@ -79,13 +87,9 @@ function updateDialogs(){
 					      }, 60000);
  
 				      }
+				}
 				      
-                              },
-                              error: function error(e, text) {
-				      document.getElementById("reportMSG").innerHTML = "System error. Please try again!";
-				      document.getElementById("reportMSG").style = "color : red";  
-                              },
-                              beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + bearer); }
+                           }
 		});
 	}
 	var now = Date.now();
