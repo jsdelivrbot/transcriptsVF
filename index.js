@@ -58,7 +58,7 @@ function updateDialogs(){
 				'Content-Type': 'application/json',
 				'Authorization': oauth
 			}
-		}function (e, r, b) {
+		}, function (e, r, b) {
 				if(e){
 					tryUntilSuccess(offset, callback);
 				} else{
