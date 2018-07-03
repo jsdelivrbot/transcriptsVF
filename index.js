@@ -24,12 +24,18 @@ var now = Date.now();
 
 function sortDialogs(){
 	if(dialogs.length > 0){
-		dialogs.sort(function (a, b) {
-			return dialogs.info.startTimeL - dialogs.info.startTimeL;
-		});
+		function compare(a,b) {
+			if (a.info.startTimeL < b.info.startTimeL)
+				return -1;
+			if (a.info.startTimeL > b.info.startTimeL)
+				return 1;
+			return 0;
+		}
+		dialogs.sort(compare);
 		dialogs = dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24)));
 	}
 	updateDialogs();
+	
 }
 
 
