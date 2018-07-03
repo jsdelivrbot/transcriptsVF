@@ -1,18 +1,13 @@
 // We use a Node plugin called Express to act as a web server
 var express = require('express');
-var jwt = require('jsonwebtoken');
-var fs = require('fs');
 var https = require('https');
-
-
-var cert_priv = fs.readFileSync('private.key');
-var cert_pub = fs.readFileSync('publickey.crt');
+var request = require('request');
 
 
 
-setInterval(function() {
-    https.get("https://marco-oauthserver.herokuapp.com/");
-}, 10000); // every 5 minutes (300000)
+// setInterval(function() {
+//     https.get("https://marco-oauthserver.herokuapp.com/");
+// }, 10000); // every 5 minutes (300000)
 
 
 
