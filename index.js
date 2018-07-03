@@ -11,11 +11,23 @@ var echoAgent = new Agent({
 	accessToken: 'c598d91bf5184acba1dd5750782d557b',
 	accessTokenSecret: '7b861610c4e51db0'
 });
-var isBotReady = 0;
+
 var bearer = "";
 var dialogs = [];
 var before = (Date.now() - (1000*60*60*24*30));
 var now = Date.now();
+
+
+
+function sortDialogs(){
+	if(dialogs.length > 0){
+		dialogs.sort(function (a, b) {
+			return dialogs.info.startTimeL - dialogs.info.startTimeL;
+		});
+		dialogs = dialogs.filter(element => element.info.startTimeL < (Date.now() - (1000*60*60*24*30)));
+	}
+	updateDialogs();
+}
 
 
 
@@ -61,12 +73,10 @@ function updateDialogs(){
 					      console.log(answer.length);
 					      before = now + 1;
 					      setInterval(function(){
-						      updateDialogs();
+						      sortDialogs();
 					      }, 60000);
  
 				      }
-				      
-     
 				      
                               },
                               error: function error(e, text) {
@@ -130,6 +140,6 @@ app.listen(app.get('port'), function() {
 
 setTimeout(function(){
 	bearer = echoAgent.transport.configuration.token;
-	updateDialogs();
+	sortDialogs();
 }, 10000);
 
