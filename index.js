@@ -17,12 +17,14 @@ var echoAgent = new Agent({
 
 var bearer = "";
 var dialogs = [];
-var before = (Date.now() - (1000*60*60*24));
-var now = Date.now();
+var nowItsTime = Date.now();
+var before = (nowItsTime - (1000*60*60*24));
+var now = nowItsTime;
 
 
 
 function sortDialogs(){
+	now = Date.now();
 	if(dialogs.length > 0){
 		function compare(a,b) {
 			if (a.info.startTimeL < b.info.startTimeL)
@@ -32,8 +34,8 @@ function sortDialogs(){
 			return 0;
 		}
 		dialogs.sort(compare);
-		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24))).length + " elementi");
-		dialogs = dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24)));
+		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24))).length + " elementi");
+		dialogs = dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24)));
 	}
 	updateDialogs();
 	
@@ -42,7 +44,7 @@ function sortDialogs(){
 
 
 function updateDialogs(){
-	var now = Date.now();
+	
 	var request = require('request');
 	
 	var conversationsToDownload = 0;
@@ -104,7 +106,6 @@ function updateDialogs(){
 				      
                  });
 	}
-	var now = Date.now();
 	 
 	tryUntilSuccess(offset, function(err, resp) {
 		 // Your code here...
