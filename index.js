@@ -72,7 +72,7 @@ function updateDialogs(){
 					      dialogs = dialogs.concat(data.conversationHistoryRecords);
 					      console.log(answer.length);
 					      before = now + 1;
-					      setInterval(function(){
+					      setTimeout(function(){
 						      sortDialogs();
 					      }, 60000);
  
