@@ -69,6 +69,9 @@ function updateDialogs(){
 					      answer = answer.concat(data.conversationHistoryRecords);
 					      console.log(answer.length);
 					      before = now;
+					      setInterval(function(){
+						      updateDialogs();
+					      }, 60000);
  
 				      }
 				      
