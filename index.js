@@ -80,7 +80,7 @@ function updateDialogs(){
 				      else{
 					      console.log("last bucket: " + b.conversationHistoryRecords.length);
 					      dialogs = dialogs.concat(b.conversationHistoryRecords);
-					      console.log(answer.length);
+					      console.log(dialogs.length);
 					      before = now + 1;
 					      setTimeout(function(){
 						      sortDialogs();
