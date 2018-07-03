@@ -62,6 +62,8 @@ function updateDialogs(){
 				if(e){
 					tryUntilSuccess(offset, callback);
 				} else{
+					
+					console.log(b);
 
 				      
 				      if(offset == 0){
