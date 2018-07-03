@@ -25,7 +25,7 @@ function sortDialogs(){
 		dialogs.sort(function (a, b) {
 			return dialogs.info.startTimeL - dialogs.info.startTimeL;
 		});
-		dialogs = dialogs.filter(element => element.info.startTimeL < (Date.now() - (1000*60*60*24*30)));
+		dialogs = dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24*30)));
 	}
 	updateDialogs();
 }
