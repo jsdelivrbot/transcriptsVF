@@ -98,6 +98,7 @@ function updateDialogs(){
 				}
 				else{
 					console.log(dialogs.length);
+					before = now + 1;
 					setTimeout(function(){
 						sortDialogs();
 					}, 60000);
