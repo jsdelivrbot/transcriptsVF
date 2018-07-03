@@ -14,6 +14,8 @@ var echoAgent = new Agent({
 var isBotReady = 0;
 var bearer = "";
 var dialogs = [];
+var before = (Date.now() - (1000*60*60*24*30));
+var now = Date.now();
 
 
 
@@ -22,6 +24,69 @@ function updateDialogs(){
 	var before = (Date.now() - (1000*60*60*24*30));
 	var request = require('request');
 	
+	var conversationsToDownload = 0;
+	var conversationsPartial = 0;
+	var offset = 0;
+	var body = "";
+	var answer = [];
+	exportObject = [];
+	
+	body = '{"start":{"from":' + start + ',"to":' + end + '}, "status":["OPEN","CLOSE"]}';	
+		  
+	 
+	 
+	function tryUntilSuccess(offset, callback) {
+	 
+	 	$.ajax({
+                              url: "https://" + uri + "/messaging_history/api/account/" + accnumb + "/conversations/search?offset=" + offset + "&limit=100",
+                              method: "POST",
+                              jsonp: "cb",
+                              jsonpCallback: "domainCallback",
+                              cache: true,
+                              contentType: "application/json",
+                              data: body,
+                              success: function success(data) {
+				      
+				      if(offset == 0){
+					      conversationsToDownload = data._metadata.count;    
+				      }
+				      
+				      conversationsPartial = conversationsPartial + data.conversationHistoryRecords.length;
+				      if(conversationsPartial < conversationsToDownload){
+					      offset = conversationsPartial;
+					      answer = answer.concat(data.conversationHistoryRecords);
+					      document.getElementById("reportMSG").innerHTML = "...downloading sessions:" + Math.round(100*(offset/data._metadata.count)) + "% completed...";
+					      document.getElementById("reportMSG").style = "color : green";      
+					      // console.log(data.conversationHistoryRecords);
+					      console.log ("adding conversations...");
+					      console.log(offset + " of --> " + conversationsToDownload);
+					      // setTimeout(function(){
+						      tryUntilSuccess(offset, callback);
+					      // }, 1000);
+				      }
+				      else{
+					      console.log("last bucket: " + data.conversationHistoryRecords.length);
+					      answer = answer.concat(data.conversationHistoryRecords);
+					      console.log(answer.length);
+					      before = now;
+ 
+				      }
+				      
+     
+				      
+                              },
+                              error: function error(e, text) {
+				      document.getElementById("reportMSG").innerHTML = "System error. Please try again!";
+				      document.getElementById("reportMSG").style = "color : red";  
+                              },
+                              beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + bearer); }
+		});
+	}
+	var now = Date.now();
+	 
+	tryUntilSuccess(offset, function(err, resp) {
+		 // Your code here...
+	});
 	
 	
 }
