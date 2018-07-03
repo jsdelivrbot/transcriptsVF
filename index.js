@@ -37,6 +37,8 @@ function sortDialogs(){
 		dialogs.sort(compare);
 		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24))).length + " elementi");
 		dialogs = dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24)));
+		console.log("piu' vecchio timestamp: " + dialogs[0].info.startTimeL);
+		console.log("max timestamp: " + (now - (1000*60*60*24)));
 	}
 	updateDialogs();
 	
