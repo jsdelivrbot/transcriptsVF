@@ -124,13 +124,12 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // If the user provides the URL "..../add"
-app.get('/add', function(req, res) {
-	var sub = req.query.sub;
+app.get('/download', function(req, res) {
+	var ID = req.query.ID;
+	var myResult = [];
+	myResult = dialogs.filter(element => element.info.conversationId === ID);
 	
-	
-	
-	
-	res.send({'result': token});
+	res.send(myResult);
 });
 
 
