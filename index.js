@@ -21,24 +21,20 @@ var now = Date.now();
 
 function updateDialogs(){
 	var now = Date.now();
-	var before = (Date.now() - (1000*60*60*24*30));
 	var request = require('request');
 	
 	var conversationsToDownload = 0;
 	var conversationsPartial = 0;
 	var offset = 0;
-	var body = "";
-	var answer = [];
-	exportObject = [];
 	
-	body = '{"start":{"from":' + start + ',"to":' + end + '}, "status":["OPEN","CLOSE"]}';	
+	var body = '{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}';	
 		  
 	 
 	 
 	function tryUntilSuccess(offset, callback) {
 	 
 	 	$.ajax({
-                              url: "https://" + uri + "/messaging_history/api/account/" + accnumb + "/conversations/search?offset=" + offset + "&limit=100",
+                              url: "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/search?offset=" + offset + "&limit=100",
                               method: "POST",
                               jsonp: "cb",
                               jsonpCallback: "domainCallback",
@@ -54,21 +50,16 @@ function updateDialogs(){
 				      conversationsPartial = conversationsPartial + data.conversationHistoryRecords.length;
 				      if(conversationsPartial < conversationsToDownload){
 					      offset = conversationsPartial;
-					      answer = answer.concat(data.conversationHistoryRecords);
-					      document.getElementById("reportMSG").innerHTML = "...downloading sessions:" + Math.round(100*(offset/data._metadata.count)) + "% completed...";
-					      document.getElementById("reportMSG").style = "color : green";      
-					      // console.log(data.conversationHistoryRecords);
+					      dialogs = dialogs.concat(data.conversationHistoryRecords);
 					      console.log ("adding conversations...");
 					      console.log(offset + " of --> " + conversationsToDownload);
-					      // setTimeout(function(){
-						      tryUntilSuccess(offset, callback);
-					      // }, 1000);
+					      tryUntilSuccess(offset, callback);
 				      }
 				      else{
 					      console.log("last bucket: " + data.conversationHistoryRecords.length);
-					      answer = answer.concat(data.conversationHistoryRecords);
+					      dialogs = dialogs.concat(data.conversationHistoryRecords);
 					      console.log(answer.length);
-					      before = now;
+					      before = now + 1;
 					      setInterval(function(){
 						      updateDialogs();
 					      }, 60000);
