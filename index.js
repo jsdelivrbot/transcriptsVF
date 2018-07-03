@@ -1,7 +1,7 @@
 // We use a Node plugin called Express to act as a web server
 var express = require('express');
 var https = require('https');
-var request = require('request');
+
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
 	accountId: '13099967',
@@ -20,6 +20,10 @@ var dialogs = [];
 function updateDialogs(){
 	var now = Date.now();
 	var before = (Date.now() - (1000*60*60*24*30));
+	var request = require('request');
+	
+	
+	
 }
 
 
