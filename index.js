@@ -32,7 +32,7 @@ function sortDialogs(){
 			return 0;
 		}
 		dialogs.sort(compare);
-		console.log("elimino " + dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24))).length + " elementi");
+		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24))).length + " elementi");
 		dialogs = dialogs.filter(element => element.info.startTimeL > (Date.now() - (1000*60*60*24)));
 	}
 	updateDialogs();
@@ -95,6 +95,7 @@ function updateDialogs(){
 
 				}
 				else{
+					console.log(dialogs.length);
 					setTimeout(function(){
 						sortDialogs();
 					}, 60000);
