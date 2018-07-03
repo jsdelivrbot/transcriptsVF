@@ -2,6 +2,15 @@
 var express = require('express');
 var https = require('https');
 var request = require('request');
+const Agent = require('node-agent-sdk').Agent;
+var echoAgent = new Agent({
+	accountId: '13099967',
+	username: 'vftranscripts',
+	appKey: '3cd846fcdfaf4a7fa40ce6082b0b0456',
+	secret: '11ab78c76ac74000',
+	accessToken: 'c598d91bf5184acba1dd5750782d557b',
+	accessTokenSecret: '7b861610c4e51db0'
+});
 
 
 
