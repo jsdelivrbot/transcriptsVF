@@ -15,11 +15,12 @@ var isBotReady = 0;
 var bearer = "";
 var dialogs = [];
 
-setTimeout(function(){
-	bearer = echoAgent.transport.configuration.token;
-}, 10000);
 
 
+function updateDialogs(){
+	var now = Date.now();
+	var before = (Date.now() - (1000*60*60*24*30));
+}
 
 
 // setInterval(function() {
@@ -39,10 +40,10 @@ app.set('port', (process.env.PORT || 5000));
 
 // Required to allow access to the service across different domains
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header('Content-Type', 'text/plain');
-  next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Content-Type', 'text/plain');
+	next();
 });
 
 app.set('views', __dirname + '/views');
@@ -50,20 +51,22 @@ app.set('view engine', 'ejs');
 
 // If the user provides the URL "..../add"
 app.get('/add', function(req, res) {
-
-     var sub = req.query.sub;
-
-
-
-
-    res.send({'result': token});
-  
- 
+	var sub = req.query.sub;
+	
+	
+	
+	
+	res.send({'result': token});
 });
 
 
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+	console.log('Node app is running on port', app.get('port'));
 });
 
+
+setTimeout(function(){
+	bearer = echoAgent.transport.configuration.token;
+	updateDialogs();
+}, 10000);
 
