@@ -41,7 +41,7 @@ function updateDialogs(){
 	var conversationsPartial = 0;
 	var offset = 0;
 	
-	var body = '{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}';
+	var body = JSON.parse('{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}');
 	var oauth = "Bearer " + bearer;
 	
 		  
