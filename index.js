@@ -4,7 +4,6 @@ var https = require('https');
 
 
 
-
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
 	accountId: '13099967',
@@ -89,8 +88,7 @@ function updateDialogs(){
 				      }
 				}
 				      
-                           }
-		});
+                 });
 	}
 	var now = Date.now();
 	 
