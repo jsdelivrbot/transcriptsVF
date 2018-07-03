@@ -44,7 +44,7 @@ function updateDialogs(){
 	
 	var body = JSON.parse('{"start":{"from":' + before + ',"to":' + now + '}, "status":["OPEN","CLOSE"]}');
 	var oauth = "Bearer " + bearer;
-	
+	console.log(body);
 		  
 	 
 	 
@@ -60,34 +60,39 @@ function updateDialogs(){
 				'Authorization': oauth
 			}
 		}, function (e, r, b) {
-				if(e){
-					tryUntilSuccess(offset, callback);
-				} else{
-
-				      
-				      if(offset == 0){
-					      conversationsToDownload = b._metadata.count;    
-				      }
-				      
-				      conversationsPartial = conversationsPartial + b.conversationHistoryRecords.length;
-				      if(conversationsPartial < conversationsToDownload){
-					      offset = conversationsPartial;
-					      dialogs = dialogs.concat(b.conversationHistoryRecords);
-					      console.log ("adding conversations...");
-					      console.log(offset + " of --> " + conversationsToDownload);
-					      tryUntilSuccess(offset, callback);
-				      }
-				      else{
-					      console.log("last bucket: " + b.conversationHistoryRecords.length);
-					      dialogs = dialogs.concat(b.conversationHistoryRecords);
-					      console.log(dialogs.length);
-					      before = now + 1;
-					      setTimeout(function(){
-						      sortDialogs();
-					      }, 60000);
- 
-				      }
+			
+			if(e){
+				tryUntilSuccess(offset, callback);
+			} else{
+				if(offset == 0){
+					conversationsToDownload = b._metadata.count;
 				}
+				if (conversationsToDownload > 0){
+					conversationsPartial = conversationsPartial + b.conversationHistoryRecords.length;
+					if(conversationsPartial < conversationsToDownload){
+						offset = conversationsPartial;
+						dialogs = dialogs.concat(b.conversationHistoryRecords);
+						console.log ("adding conversations...");
+						console.log(offset + " of --> " + conversationsToDownload);
+						tryUntilSuccess(offset, callback);
+					}
+					else{
+						console.log("last bucket: " + b.conversationHistoryRecords.length);
+						dialogs = dialogs.concat(b.conversationHistoryRecords);
+						console.log(dialogs.length);
+						before = now + 1;
+						setTimeout(function(){
+							sortDialogs();
+						}, 60000);
+					}
+
+				}
+				else{
+					setTimeout(function(){
+						sortDialogs();
+					}, 60000);
+				}
+			}
 				      
                  });
 	}
