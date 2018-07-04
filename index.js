@@ -89,6 +89,7 @@ function updateDialogs(){
 						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
 						console.log("piecetoadd: " + piecetoadd.length);
 						dialogs = dialogs.concat(piecetoadd);
+						console.log("dialogs: " + dialogs.length);
 						console.log ("adding conversations...");
 						console.log(offset + " of --> " + conversationsToDownload);
 						tryUntilSuccess(offset, callback);
@@ -99,13 +100,9 @@ function updateDialogs(){
 						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
 						console.log("piecetoadd: " + piecetoadd.length);
 						dialogs = dialogs.concat(piecetoadd);
-						console.log(dialogs.length);
+						console.log("dialogs: " + dialogs.length);
 						before = now + 1;
 						isBotReady = true;
-						dialogs = dialogs.filter(function(item, pos) {
-							return dialogs.indexOf(item.info.conversationId) == pos;
-						})
-						console.log(dialogs.length);
 						setTimeout(function(){
 							sortDialogs();
 						}, 60000);
