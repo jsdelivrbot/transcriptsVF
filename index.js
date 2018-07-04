@@ -1381,16 +1381,16 @@ app.get('/download', function(req, res) {
 		  var stream = new Stream();
 
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xlsx');
-			res.setHeader('Content-type', 'application/vnd.ms-excel');
+			res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 			res.charset = 'UTF-8';
 			res.write(xls, function(err) { res.end(); });
-		res.download('/data.xlsx', 'data.xlsx');
+		
 
-		 //  stream.pipe = function(dest) {
-		    // dest.write('Hello Dolly')
-		  // }
+		 stream.pipe = function(dest) {
+		 	dest.write('Hello Dolly')
+		 }
 
-		    // stream.pipe(res)
+		 stream.pipe(res)
 
 	}
 	
