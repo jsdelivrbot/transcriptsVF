@@ -17,6 +17,7 @@ var echoAgent = new Agent({
 });
 
 var bearer = "";
+var isBotReady = false;
 var dialogs = [];
 var nowItsTime = Date.now();
 var before = (nowItsTime - (1000*60*60*24));
@@ -93,6 +94,7 @@ function updateDialogs(){
 						dialogs = dialogs.concat(b.conversationHistoryRecords);
 						console.log(dialogs.length);
 						before = now + 1;
+						isBotReady = true;
 						setTimeout(function(){
 							sortDialogs();
 						}, 60000);
@@ -151,11 +153,17 @@ app.set('view engine', 'ejs');
 
 // If the user provides the URL "..../add"
 app.get('/download', function(req, res) {
-	var ID = req.query.ID;
-	var myResult = [];
-	myResult = dialogs.filter(element => element.info.conversationId === ID);
+	if (!isBotReady){
+		res.send("errore");
+	}  else{
+		var ID = req.query.ID;
+		var myResult = [];
+		myResult = dialogs.filter(element => element.info.conversationId === ID);
+		res.send(myResult);
+	}
 	
-	res.send(myResult);
+
+	
 });
 
 
