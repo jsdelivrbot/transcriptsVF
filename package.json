@@ -15,7 +15,8 @@
     "express": "4.13.3",
     "async": "^2.1.4",
     "request": "^2.79.0",
-    "events": "^3.0.0"
+    "events": "^3.0.0",
+    "blob": "0.0.4"
   },
   "repository": {
     "type": "git",
