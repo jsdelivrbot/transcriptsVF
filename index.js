@@ -170,8 +170,9 @@ app.get('/download', function(req, res) {
 		var myResult = [];
 		myResult = dialogs.filter(element => (element.info.startTimeL >= startQuery) && (element.info.startTimeL <= endQuery));
 		console.log("done");
+		var myLength = myResult.length;
 
-		res.send(myResult.length);
+		res.send(myLength);
 	}
 	
 
