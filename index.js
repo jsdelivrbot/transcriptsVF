@@ -99,7 +99,7 @@ function updateDialogs(){
 						dialogs = dialogs.filter(function(item, pos) {
 							return dialogs.indexOf(item.info.conversationId) == pos;
 						})
-						console.logs(dialogs.length);
+						console.log(dialogs.length);
 						setTimeout(function(){
 							sortDialogs();
 						}, 60000);
