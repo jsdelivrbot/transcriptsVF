@@ -164,10 +164,14 @@ app.get('/download', function(req, res) {
 	if (!isBotReady){
 		res.send("errore");
 	}  else{
-		var ID = req.query.ID;
+		var startQuery = req.query.start;
+		var endQuery = req.query.end;
+		var optionsQuery = req.query.options;
 		var myResult = [];
-		myResult = dialogs.filter(element => element.info.conversationId === ID);
-		res.send(myResult);
+		myResult = dialogs.filter(element => (element.info.startTimeL >= startQuery) && (element.info.startTimeL <= endQuery));
+		console.log("done");
+
+		res.send(myResult.length);
 	}
 	
 
