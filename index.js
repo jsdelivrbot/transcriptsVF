@@ -87,6 +87,7 @@ function updateDialogs(){
 						offset = conversationsPartial;
 						var piecetoadd = b.conversationHistoryRecords;
 						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
+						console.log("piecetoadd: " + piecetoadd.length);
 						dialogs = dialogs.concat(piecetoadd);
 						console.log ("adding conversations...");
 						console.log(offset + " of --> " + conversationsToDownload);
@@ -96,6 +97,7 @@ function updateDialogs(){
 						console.log("last bucket: " + b.conversationHistoryRecords.length);
 						var piecetoadd = b.conversationHistoryRecords;
 						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
+						console.log("piecetoadd: " + piecetoadd.length);
 						dialogs = dialogs.concat(piecetoadd);
 						console.log(dialogs.length);
 						before = now + 1;
