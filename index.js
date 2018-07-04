@@ -26,37 +26,6 @@ var now = nowItsTime;
 
 
 
-function roughSizeOfObject( object ) {
-    var objectList = [];
-    var stack = [ object ];
-    var bytes = 0;
-    while ( stack.length ) {
-        var value = stack.pop();
-        if ( typeof value === 'boolean' ) {
-            bytes += 4;
-        }
-        else if ( typeof value === 'string' ) {
-            bytes += value.length * 2;
-        }
-        else if ( typeof value === 'number' ) {
-            bytes += 8;
-        }
-        else if
-        (
-            typeof value === 'object'
-            && objectList.indexOf( value ) === -1
-        )
-        {
-            objectList.push( value );
-            for( var i in value ) {
-                stack.push( value[ i ] );
-            }
-        }
-    }
-    return bytes;
-}
-
-    			
 
 
 /***************
@@ -1291,7 +1260,6 @@ function updateDialogs(){
 						console.log("piecetoadd: " + piecetoadd.length);
 						dialogs = dialogs.concat(piecetoadd);
 						console.log("dialogs: " + dialogs.length);
-						console.log("size: " + roughSizeOfObject(dialogs));
 						before = now + 1;
 						isBotReady = true;
 						setTimeout(function(){
@@ -1403,7 +1371,7 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=theDocument.txt');
 			res.setHeader('Content-type', 'text/plain');
 			res.charset = 'UTF-8';
-			res.write("Hello, world");
+			res.write(JSON.stringify(dialogs));
 			res.end();
 
 		  stream.pipe = function(dest) {
