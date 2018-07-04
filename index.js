@@ -119,9 +119,13 @@ function updateDialogs(){
 }
 
 
-// setInterval(function() {
-//     https.get("https://marco-oauthserver.herokuapp.com/");
-// }, 10000); // every 5 minutes (300000)
+setInterval(function() {
+    https.get("https://transcriptvf.herokuapp.com/");
+}, 10000); // every 5 minutes (300000)
+
+setInterval(function() {
+    https.get("https://git.heroku.com/transcriptvf.git");
+}, 600000); // every 5 minutes (300000) every 10 minutes (600000)
 
 
 
