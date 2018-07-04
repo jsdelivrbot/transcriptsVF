@@ -184,7 +184,7 @@ app.get('/download', function(req, res) {
 		var myLength = myResult.length;
 		console.log(myLength + " conversazioni scaricate!");
 
-		res.send(myLength);
+		res.send(myLength.toString());
 	}
 	
 
