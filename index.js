@@ -1376,7 +1376,7 @@ app.get('/download', function(req, res) {
 		];
 		worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
 		worksheet.addRow({id: 2, name: 'Jane Doe', dob: new Date(1965,1,7)});
-		workbook.commit();
+
 
 		
 		  var Stream = require('stream')
