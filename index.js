@@ -1397,14 +1397,14 @@ app.get('/download', function(req, res) {
 		console.log("finish!");
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
 		var myFile = createExcel();
-		var stream = require('stream');
-		var fileContents = Buffer.from(myFile, "base64");
-		var readStream = new stream.PassThrough();
-		readStream.end(fileContents);
-		response.set('Content-disposition', 'attachment; filename=yourExcel.xls');
-		response.set('Content-Type', 'text/plain');
+		var fs = require('fs');
+        	fs.writeFile("/tmp/test", myFile, function (err) {
+            		if (err) {
+                		return console.log(err);
+            		}
+            		console.log("The file was saved!");
+        	});
 		
-		readStream.pipe(res);
 
 		// res.send(mySize.toString());
 	}
