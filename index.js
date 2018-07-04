@@ -1381,7 +1381,7 @@ app.get('/download', function(req, res) {
 		  var Stream = require('stream')
 		  var stream = new Stream();
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
+		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xlsx');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			res.charset = 'UTF-8';
 			res.write(xls, function(err) { res.end(); });
