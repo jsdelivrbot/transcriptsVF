@@ -1346,7 +1346,7 @@ app.get('/download', function(req, res) {
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
 
 		var fs = require('fs');
-		var writeStream = fs.createWriteStream("file.xls");
+		var writeStream = fs.createWriteStream("file.xls", {flags: 'w', encoding: 'utf-8',mode: 0666});
 		var header="Sl No"+"\t"+" Age"+"\t"+"Name"+"\n";
 		var row1 = "0"+"\t"+" 21"+"\t"+"Rob"+"\n";
 		var row2 = "1"+"\t"+" 22"+"\t"+"bob"+"\n";
@@ -1355,7 +1355,7 @@ app.get('/download', function(req, res) {
 		writeStream.write(row1);
 		writeStream.write(row2);
 		
-		writeStream.close();
+		writeStream.end();
 		
 
 
