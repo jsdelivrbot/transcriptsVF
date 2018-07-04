@@ -1365,13 +1365,27 @@ app.get('/download', function(req, res) {
 		
 		*****/
 		
+		
+		var Excel = require('exceljs');
+		var workbook = new Excel.Workbook();
+		var worksheet = workbook.addWorksheet('My Sheet');
+		worksheet.columns = [
+		    { header: 'Id', key: 'id', width: 10 },
+		    { header: 'Name', key: 'name', width: 32 },
+		    { header: 'D.O.B.', key: 'DOB', width: 10 }
+		];
+		worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
+		worksheet.addRow({id: 2, name: 'Jane Doe', dob: new Date(1965,1,7)});
+		workbook.commit();
+
+		
 		  var Stream = require('stream')
 		  var stream = new Stream();
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=theDocument.txt');
-			res.setHeader('Content-type', 'text/plain');
+		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
+			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			res.charset = 'UTF-8';
-			res.write(JSON.stringify(dialogs), function(err) { res.end(); });
+			res.write(workbook, function(err) { res.end(); });
 
 		  stream.pipe = function(dest) {
 		    dest.write('Hello Dolly')
