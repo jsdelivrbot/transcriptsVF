@@ -1386,7 +1386,7 @@ app.get('/download', function(req, res) {
 
 
 
-		res.send("done");
+		res.send("done new");
 	}
 	
 
