@@ -1378,7 +1378,7 @@ app.get('/download', function(req, res) {
 		];
 		worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
 		worksheet.addRow({id: 2, name: 'Jane Doe', dob: new Date(1965,1,7)});
-		workbook.commit();
+
 		workbook.xlsx.writeFile('./temp.xlsx').then(function() {
 		    // done
 		    console.log('file is written');
