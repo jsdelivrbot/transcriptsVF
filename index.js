@@ -1384,12 +1384,13 @@ app.get('/download', function(req, res) {
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			res.charset = 'UTF-8';
 			res.write(xls, function(err) { res.end(); });
+		res.download('/data.xlsx', 'data.xlsx');
 
-		  stream.pipe = function(dest) {
-		    dest.write('Hello Dolly')
-		  }
+		 //  stream.pipe = function(dest) {
+		    // dest.write('Hello Dolly')
+		  // }
 
-		    stream.pipe(res)
+		    // stream.pipe(res)
 
 	}
 	
