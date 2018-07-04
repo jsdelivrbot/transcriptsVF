@@ -21,7 +21,7 @@ var bearer = "";
 var isBotReady = false;
 var dialogs = [];
 var nowItsTime = Date.now();
-var before = (nowItsTime - (1000*60*60*12));
+var before = (nowItsTime - (1000*60*60*24*30));
 var now = nowItsTime;
 
 
@@ -1196,8 +1196,8 @@ function sortDialogs(){
 			return 0;
 		}
 		dialogs.sort(compare);
-		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24))).length + " elementi");
-		dialogs = dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*12)));
+		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24*30))).length + " elementi");
+		dialogs = dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24*30)));
 		console.log("piu' vecchio timestamp: " + dialogs[0].info.startTimeL);
 		console.log("max timestamp: " + (now - (1000*60*60*12)));
 	}
