@@ -1380,8 +1380,7 @@ app.get('/download', function(req, res) {
 		worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
 		worksheet.addRow({id: 2, name: 'Jane Doe', dob: new Date(1965,1,7)});
 
-		var tempFilePath = tempfile('.xlsx');
-		workbook.xlsx.writeFile(tempFilePath).then(function() {
+		workbook.xlsx.writeFile('.xlsx').then(function() {
 		    console.log('file is written');
 		    res.sendFile(tempFilePath, function(err){
 			console.log('---------- error downloading file: ' + err);
