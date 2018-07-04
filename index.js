@@ -1371,6 +1371,7 @@ app.get('/download', function(req, res) {
 		var Excel = require('exceljs');
 		var workbook = new Excel.Workbook();
 		var worksheet = workbook.addWorksheet('My Sheet');
+
 		worksheet.columns = [
 		    { header: 'Id', key: 'id', width: 10 },
 		    { header: 'Name', key: 'name', width: 32 },
@@ -1379,9 +1380,12 @@ app.get('/download', function(req, res) {
 		worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
 		worksheet.addRow({id: 2, name: 'Jane Doe', dob: new Date(1965,1,7)});
 
-		workbook.xlsx.writeFile('./temp.xlsx').then(function() {
-		    // done
+		var tempFilePath = tempfile('.xlsx');
+		workbook.xlsx.writeFile(tempFilePath).then(function() {
 		    console.log('file is written');
+		    res.sendFile(tempFilePath, function(err){
+			console.log('---------- error downloading file: ' + err);
+		    });
 		});
 
 
