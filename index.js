@@ -85,14 +85,18 @@ function updateDialogs(){
 					conversationsPartial = conversationsPartial + b.conversationHistoryRecords.length;
 					if(conversationsPartial < conversationsToDownload){
 						offset = conversationsPartial;
-						dialogs = dialogs.concat(b.conversationHistoryRecords);
+						var piecetoadd = b.conversationHistoryRecords;
+						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
+						dialogs = dialogs.concat(piecetoadd);
 						console.log ("adding conversations...");
 						console.log(offset + " of --> " + conversationsToDownload);
 						tryUntilSuccess(offset, callback);
 					}
 					else{
 						console.log("last bucket: " + b.conversationHistoryRecords.length);
-						dialogs = dialogs.concat(b.conversationHistoryRecords);
+						var piecetoadd = b.conversationHistoryRecords;
+						piecetoadd = piecetoadd.filter(element => element.info.startTimeL >= before);
+						dialogs = dialogs.concat(piecetoadd);
 						console.log(dialogs.length);
 						before = now + 1;
 						isBotReady = true;
