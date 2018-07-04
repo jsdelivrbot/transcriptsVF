@@ -1383,7 +1383,8 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xlsx');
 			res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 			res.charset = 'UTF-8';
-			res.write(xls, function(err) { res.end(); });
+			// res.write(xls, function(err) { res.end(); });
+			res.write(xls);
 		
 
 		 stream.pipe = function(dest) {
