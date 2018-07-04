@@ -96,6 +96,9 @@ function updateDialogs(){
 						console.log(dialogs.length);
 						before = now + 1;
 						isBotReady = true;
+						dialogs = dialogs.filter(function(item, pos) {
+							return a.indexOf(item.info.conversationId) == pos;
+						})
 						setTimeout(function(){
 							sortDialogs();
 						}, 60000);
