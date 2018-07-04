@@ -168,9 +168,21 @@ app.get('/download', function(req, res) {
 		var endQuery = req.query.end;
 		var optionsQuery = req.query.options;
 		var myResult = [];
-		myResult = dialogs.filter(element => (element.info.startTimeL >= startQuery) && (element.info.startTimeL <= endQuery));
-		console.log("done");
+		myResult = dialogs.filter(element => element.info.startTimeL >= startQuery);
+		console.log("step1");
+		myResult = myResult.filter(element => element.info.startTimeL <= endQuery);
+		console.log("step2");
+		if(optionsQuery === "Open"){
+			myResult = myResult.filter(element => element.info.endTimeL === -1);
+			console.log("step3a");
+		}
+		if(optionsQuery === "Close"){
+			myResult = myResult.filter(element => element.info.endTimeL !== -1);
+			console.log("step3b");
+		}
+		console.log("finish!");
 		var myLength = myResult.length;
+		console.log(myLength + " conversazioni scaricate!");
 
 		res.send(myLength);
 	}
