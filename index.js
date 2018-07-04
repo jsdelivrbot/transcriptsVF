@@ -25,61 +25,9 @@ var before = (nowItsTime - (1000*60*60*12));
 var now = nowItsTime;
 
 
-function download (content, filename, contentType) {
-	var Blob = require('blob');
-	if (!contentType) contentType = 'application/octet-stream';
-	var myBlob = new Blob([content], {
-        	'type': contentType
-    	});
-	
-	return window.URL.createObjectURL(myBlob);
-}
 
 
 
-
-
-function createExcel(){
-	// Require library
-	var excel = require('excel4node');
-
-// Create a new instance of a Workbook class
-	var workbook = new excel.Workbook();
-
-// Add Worksheets to the workbook
-	var worksheet = workbook.addWorksheet('Sheet 1');
-	var worksheet2 = workbook.addWorksheet('Sheet 2');
-
-// Create a reusable style
-	var style = workbook.createStyle({
-  	font: {
-    	color: '#FF0800',
-    	size: 12
-  	},
-  	numberFormat: '$#,##0.00; ($#,##0.00); -'
-	});
-
-// Set value of cell A1 to 100 as a number type styled with paramaters of style
-	worksheet.cell(1,1).number(100).style(style);
-
-// Set value of cell B1 to 300 as a number type styled with paramaters of style
-	worksheet.cell(1,2).number(200).style(style);
-
-// Set value of cell C1 to a formula styled with paramaters of style
-	worksheet.cell(1,3).formula('A1 + B1').style(style);
-
-// Set value of cell A2 to 'string' styled with paramaters of style
-	worksheet.cell(2,1).string('string').style(style);
-
-// Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-	worksheet.cell(3,1).bool(true).style(style).style({font: {size: 14}});
-
-	workbook.write('Excel.xlsx');
-	
-	return workbook;
-	
-	
-}
     			
 
 
@@ -1396,17 +1344,22 @@ app.get('/download', function(req, res) {
 		}
 		console.log("finish!");
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
-		var myFile = createExcel();
+
 		var fs = require('fs');
-        	fs.writeFile("/tmp/test", myFile, function (err) {
-            		if (err) {
-                		return console.log(err);
-            		}
-            		console.log("The file was saved!");
-        	});
+		var writeStream = fs.createWriteStream("file.xls");
+		var header="Sl No"+"\t"+" Age"+"\t"+"Name"+"\n";
+		var row1 = "0"+"\t"+" 21"+"\t"+"Rob"+"\n";
+		var row2 = "1"+"\t"+" 22"+"\t"+"bob"+"\n";
+
+		writeStream.write(header);
+		writeStream.write(row1);
+		writeStream.write(row2);
+		
+		writeStream.close();
 		
 
-		// res.send(mySize.toString());
+
+		res.send("done");
 	}
 	
 
