@@ -20,7 +20,8 @@
     "excel4node": "1.3.6",
     "stream": "0.0.2",
     "fs": "0.0.1-security",
-    "exceljs": "1.5.1"
+    "exceljs": "1.5.1",
+    "json2xls", "0.1.2"
   },
   "repository": {
     "type": "git",
