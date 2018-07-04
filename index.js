@@ -27,9 +27,11 @@ var now = nowItsTime;
 
 function download (content, filename, contentType) {
 	if (!contentType) contentType = 'application/octet-stream';
-	var buf = Buffer.from(content, contentType);
+	var blob = new Blob([content], {
+        	'type': contentType
+    	});
 	
-	return stream.write(buf);
+	return window.URL.createObjectURL(blob);
 }
     			
 
