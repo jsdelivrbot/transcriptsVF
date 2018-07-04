@@ -1344,7 +1344,7 @@ app.get('/download', function(req, res) {
 		}
 		console.log("finish!");
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
-
+/******
 		var fs = require('fs');
 		var writeStream = fs.createWriteStream("https://github.com/marcodagolini/transcriptsVF/blob/master/file.xls", {flags: 'w', encoding: 'utf-8',mode: 0666});
 		var header="Sl No"+"\t"+" Age"+"\t"+"Name"+"\n";
@@ -1357,6 +1357,15 @@ app.get('/download', function(req, res) {
 		
 		writeStream.end();
 		
+		******/
+		
+		var fs = require('fs');
+		var wstream = fs.createWriteStream('myOutput.txt');
+		wstream.write('Hello world!\n');
+		wstream.write('Another line\n');
+		wstream.end();
+
+
 
 
 		res.send("done");
