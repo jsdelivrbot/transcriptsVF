@@ -37,35 +37,6 @@ function download (content, filename, contentType) {
 
 
 
-function roughSizeOfObject( object ) {
-    var objectList = [];
-    var stack = [ object ];
-    var bytes = 0;
-    while ( stack.length ) {
-        var value = stack.pop();
-        if ( typeof value === 'boolean' ) {
-            bytes += 4;
-        }
-        else if ( typeof value === 'string' ) {
-            bytes += value.length * 2;
-        }
-        else if ( typeof value === 'number' ) {
-            bytes += 8;
-        }
-        else if
-        (
-            typeof value === 'object'
-            && objectList.indexOf( value ) === -1
-        )
-        {
-            objectList.push( value );
-            for( var i in value ) {
-                stack.push( value[ i ] );
-            }
-        }
-    }
-    return bytes;
-}
 
 
 function createExcel(){
@@ -1426,9 +1397,16 @@ app.get('/download', function(req, res) {
 		console.log("finish!");
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
 		var myFile = createExcel();
-		var mySize = roughSizeOfObject(myFile)
+		var stream = require('stream');
+		var fileContents = Buffer.from(myFile, "base64");
+		var readStream = new stream.PassThrough();
+		readStream.end(fileContents);
+		response.set('Content-disposition', 'attachment; filename=yourExcel.xls');
+		response.set('Content-Type', 'text/plain');
+		
+		readStream.pipe(res);
 
-		res.send(mySize.toString());
+		// res.send(mySize.toString());
 	}
 	
 
