@@ -36,6 +36,38 @@ function download (content, filename, contentType) {
 }
 
 
+
+function roughSizeOfObject( object ) {
+    var objectList = [];
+    var stack = [ object ];
+    var bytes = 0;
+    while ( stack.length ) {
+        var value = stack.pop();
+        if ( typeof value === 'boolean' ) {
+            bytes += 4;
+        }
+        else if ( typeof value === 'string' ) {
+            bytes += value.length * 2;
+        }
+        else if ( typeof value === 'number' ) {
+            bytes += 8;
+        }
+        else if
+        (
+            typeof value === 'object'
+            && objectList.indexOf( value ) === -1
+        )
+        {
+            objectList.push( value );
+            for( var i in value ) {
+                stack.push( value[ i ] );
+            }
+        }
+    }
+    return bytes;
+}
+
+
 function createExcel(){
 	// Require library
 	var excel = require('excel4node');
@@ -1394,8 +1426,9 @@ app.get('/download', function(req, res) {
 		console.log("finish!");
 		// var myURL = download (myResult, 'download.xls', 'application/vnd.ms-excel')
 		var myFile = createExcel();
+		var mySize = roughSizeOfObject(myFile)
 
-		res.send("done");
+		res.send(mySize.toString());
 	}
 	
 
