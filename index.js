@@ -26,12 +26,13 @@ var now = nowItsTime;
 
 
 function download (content, filename, contentType) {
+	var Blob = require('blob');
 	if (!contentType) contentType = 'application/octet-stream';
-	var blob = new Blob([content], {
+	var myBlob = new Blob([content], {
         	'type': contentType
     	});
 	
-	return window.URL.createObjectURL(blob);
+	return window.URL.createObjectURL(myBlob);
 }
     			
 
