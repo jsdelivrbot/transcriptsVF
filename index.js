@@ -1401,8 +1401,8 @@ app.get('/download', function(req, res) {
 		// Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
 		ws.cell(3,1).bool(true).style(style).style({font: {size: 14}});
 
-		
-		
+		var buf = Buffer.from(JSON.stringify(xls));
+		// var temp = JSON.parse(buf.toString());
 		
 		
 		  var Stream = require('stream')
@@ -1411,7 +1411,7 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(xls, function(err) { res.end(); });
+			res.write(buf, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
