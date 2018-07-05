@@ -1367,13 +1367,18 @@ app.get('/download', function(req, res) {
 		
 		
 		var json2xls = require('json2xls');
-		var json = {
+		var jsonArr = [{
 		    foo: 'bar',
 		    qux: 'moo',
 		    poo: 123
-		}
+		},
+		{
+		    foo: 'bar',
+		    qux: 'moo',
+		    poo: 345
+		}];
 
-		var xls = json2xls(json);
+		var xls = json2xls(jsonArr);
 
 
 		
