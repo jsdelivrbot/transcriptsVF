@@ -1369,20 +1369,10 @@ app.get('/download', function(req, res) {
 		
 		
 		
-		var xls = {
-			{
-			    foo: 'bar',
-			    qux: 'moo',
-			    poo: 123,
-			    stux: new Date()
-		},
-		    {
-			    foo: 'bar',
-			    qux: 'moo',
-			    poo: 123,
-			    stux: new Date()
-		    }
-		}
+		var xls = [
+			{ "primo": 1, "secondo": 2 },
+			{ "primo": 3, "secondo": 4 }
+		];
 
 
 		var buf = Buffer.from(JSON.stringify(xls));
