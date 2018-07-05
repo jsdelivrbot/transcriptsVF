@@ -1368,8 +1368,8 @@ app.get('/download', function(req, res) {
 		var j2xls = require('json2xls-xml')({ pretty : true });
  
 		var doc = {
-			[firstname : 'Foo', lastname: 'Bar', age: 23, weight: 25.7876, birth : new Date()],
-			[firstname : 'Bar', lastname: 'foobar', age: 73, weight: 22225.33, birth : new Date()]
+			['Foo', 'Bar',  23,  25.7876,  new Date()],
+			['Foo2', 'Bar2',  232,  22225.7876,  new Date()]
 		};
 
 		var xls = j2xls(doc);
