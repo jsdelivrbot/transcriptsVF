@@ -1389,7 +1389,7 @@ app.get('/download', function(req, res) {
 		
 
 		 stream.pipe = function(dest) {
-		 	dest.write('Hello Dolly')
+		 	// dest.write('Hello Dolly')
 		 }
 
 		 stream.pipe(res)
