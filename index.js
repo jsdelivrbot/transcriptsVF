@@ -1491,29 +1491,22 @@ app.get('/download', function(req, res) {
 			""
 		 ];
 		
-		res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
-		res.setHeader('Content-type', 'application/vnd.ms-excel');
-		
-		const fs = require('fs');
-		const file = fs.createWriteStream('./big.file');
+		var myFile = "";
 		
 		for (var colName in testTypes) {
-			file.write(colName + "\t");
+			myFile = myFile + colName + "\t";
     		}
 		file.write("\n");
 		for(var i = 0; i < optionsQuery; i++){
 			var index = myTrial.length;
 			for(var z = 0; z < index; z++){
-				file.write(myTrial[z]);
-				file.write("\t");
+				myFile = myFile + myTrial[z] + "\t";
 			}
-			file.write("\n");
+			myFile = myFile + "\n";
 		}
 	
-		file.end();
 
-		const src = fs.createReadStream('./big.file');
-  		src.pipe(res);
+		res.send("ok");
 		
 		
 		/**********************************
