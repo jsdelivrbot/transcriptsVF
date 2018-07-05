@@ -1491,7 +1491,8 @@ app.get('/download', function(req, res) {
 			""
 		 ];
 		
-		
+		res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
+		res.setHeader('Content-type', 'application/vnd.ms-excel');
 		
 		const fs = require('fs');
 		const file = fs.createWriteStream('./big.file');
