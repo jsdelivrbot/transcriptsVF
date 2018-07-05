@@ -1368,13 +1368,11 @@ app.get('/download', function(req, res) {
 		var j2xls = require('json2xls-xml')({ pretty : true });
  
 		var doc = {
-		    Foo : [
-			{ firstname : 'John', lastname: 'Doo'}
-			, { firstname : 'Foo', lastname: 'Bar', age: 23, weight: 25.7876, birth : new Date()}
+			[
+			    { firstname : 'Foo', lastname: 'Bar', age: 23, weight: 25.7876, birth : new Date()}
 		    ]
-		    , Bar : [
-			{ firstname : 'Rene', lastname: 'Malin'}
-			, { firstname : 'Foo', lastname: 'foobar', age: 73, weight: 22225.33, birth : new Date()}
+		    	,[
+			{ firstname : 'Foo', lastname: 'foobar', age: 73, weight: 22225.33, birth : new Date()}
 		    ]
 		};
 
