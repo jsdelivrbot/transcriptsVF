@@ -1388,7 +1388,7 @@ app.get('/download', function(req, res) {
 
 
 		var buf = Buffer.from(JSON.stringify(xls));
-		// var temp = JSON.parse(buf.toString());
+		var temp = JSON.parse(buf.toString());
 		
 		
 		  var Stream = require('stream')
@@ -1397,7 +1397,7 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(buf, function(err) { res.end(); });
+			res.write(temp, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
