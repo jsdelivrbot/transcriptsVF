@@ -1505,6 +1505,7 @@ app.get('/download', function(req, res) {
 		stream.pipe(process.stdout);
 		res.write("2\t3");
 		stream.pipe(process.stdout);
+		res.end();
 		
 		 
 
