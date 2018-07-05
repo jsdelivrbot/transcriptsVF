@@ -1491,12 +1491,14 @@ app.get('/download', function(req, res) {
 			""
 		 ];
 		
-		
-		var Readable = require('stream').Readable;
-		var s = new Readable();
-		s._read = function noop() {}; // redundant? see update below
-		s.push('0\t1\n2\t3');
-		s.push(null);
+		var Stream = require('stream')
+		var stream = new Stream();		
+		stream.pipe = function(dest) {
+		  dest.write('0\t1\n2\t3');
+		  return dest;
+		};
+
+		stream.pipe(process.stdout);
 		
 		 
 
