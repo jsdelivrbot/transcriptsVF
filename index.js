@@ -1365,8 +1365,7 @@ app.get('/download', function(req, res) {
 		
 		*****/
 		
-		
-		import json2xlsx from 'json2xlsx-export';
+		var json2xlsx = require('json2xlsx-export');
  
 			const config = {
 			  filename: 'AwesomeFile',
