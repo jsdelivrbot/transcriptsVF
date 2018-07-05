@@ -1509,7 +1509,8 @@ app.get('/download', function(req, res) {
         		res.write(colName);
 			res.write("\t");
     		}
-		for (var key in myTrial) {
+		res.write("\n");
+		for (var colName in myTrial) {
         		res.write(myTrial[colName]);
 			res.write("\t");
     		}
