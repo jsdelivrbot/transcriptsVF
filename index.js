@@ -1365,6 +1365,8 @@ app.get('/download', function(req, res) {
 		
 		*****/
 		
+		var j2xls = require('json2xls-xml')({ pretty : true });
+		
 		var doc = {
 		    Foo : [
 			{ firstname : 'John', lastname: 'Doo'}
