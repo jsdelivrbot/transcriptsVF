@@ -1493,7 +1493,30 @@ app.get('/download', function(req, res) {
 		
 		
 		
+		const fs = require('fs');
+		const file = fs.createWriteStream('./big.file');
+		
+		for (var colName in testTypes) {
+			file.write(colName + "\t");
+    		}
+		file.write("\n");
+		for(var i = 0; i < optionsQuery; i++){
+			var index = myTrial.length;
+			for(var z = 0; z < index; z++){
+				file.write(myTrial[z]);
+				file.write("\t");
+			}
+			file.write("\n");
+		}
 	
+		file.end();
+
+		const src = fs.createReadStream('./big.file');
+  		src.pipe(res);
+		
+		
+		/**********************************
+		
 		
 		
 		
@@ -1534,6 +1557,11 @@ app.get('/download', function(req, res) {
 		}
 		
 		stream.pipe(res)
+		
+		
+		
+		
+		***********************************/
 		
 
 
