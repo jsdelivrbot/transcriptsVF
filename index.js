@@ -1365,39 +1365,95 @@ app.get('/download', function(req, res) {
 		
 		*****/
 		
-
-		var xls = {
-			"sheet1": [
-				{"primo": 1, "secondo": 2, "terzo": 3},
-				{"primo": 4, "secondo": 5, "terzo": 6}
-			],
-			"sheet2": [
-				{"primo": 1, "secondo": 2, "terzo": 3},
-				{"primo": 4, "secondo": 5, "terzo": 6}
-			],
-			"sheet3": [
-				{"primo": 1, "secondo": 2, "terzo": 3},
-				{"primo": 4, "secondo": 5, "terzo": 6}
-			]	
-			
-		}
-
-
-		var buf = Buffer.from(JSON.stringify(xls));
-		// var temp = JSON.parse(buf.toString());
 		
 		
-		  var Stream = require('stream')
-		  var stream = new Stream();
+		
+		testTypes = {
+    			"start": "String",
+    			"end": "String",
+			"durationinseconds": "String",
+			"efforttimegeneral": "String",
+			"efforttimeoutbound": "String",
+			"inactivetime": "String",
+    			"agentgeneral": "String",
+			"agentoutbound": "String",
+			"teamgeneral": "String",
+			"teamoutbound": "String",
+			"skill": "String",
+			"channel": "String",
+			"night": "String",
+			"outbound": "String",
+			"telefono": "String",
+			"ricontatto": "String",
+			"cfiscale": "String",
+			"tags": "String",
+			"triplettauno": "String",
+			"triplettadue": "String",
+			"triplettatre": "String",
+			"limbo": "String",
+			"limboGeneral": "String",
+			"limboOutbound": "String",
+			"limboaveragetime": "String",
+			"risvegliata": "String",
+			"risvegliataGeneral": "String",
+			"risvegliataOutbound": "String",
+			"freeze": "String",
+			"freezeGeneral": "String",
+			"freezeOutbound": "String",
+			"risvFreeze": "String",
+			"risvFreezeGeneral": "String",
+			"risvFreezeOutbound": "String",
+			"numeroagentigeneral": "String",
+			"numeroagentioutbound": "String",
+			"numerogruppigeneral": "String",
+			"numerogruppioutbound": "String",
+			"yesno": "String",
+			"comments": "String",
+			"endReason": "String",
+			"timeToAccept": "String",
+			"firstTimeAnswer": "String",
+			"timestampFacebook_priv": "String",
+			"timestampOutbound": "String",
+			"timeInFacebook_bot": "String",
+			"timestampLastActGen": "String",
+			"timestampLastActOut": "String",
+			"timestampNextUnfreeze": "String",
+			"lastActivityAgent": "String",
+			"lastTypeActivityAgent": "String",
+			"customerName": "String",
+			"phoneNumber": "String",
+			"imeiNumber": "String",
+    			"conversation": "String",
+    			"transcript": "String",
+			"campo1": "String",
+			"campo2": "String",
+			"campo3": "String"
+		 };
+		 
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
-			res.setHeader('Content-type', 'application/vnd.ms-excel');
-			// res.charset = 'UTF-8';
-			res.write("1");
+    		
+		
+		var Stream = require('stream')
+		var stream = new Stream();
+
+		res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
+		res.setHeader('Content-type', 'application/vnd.ms-excel');
+		// res.charset = 'UTF-8';
+		
+		for (var colName in testTypes) {
+        		res.write(colName);
 			res.write("\t");
-			res.write("2");
-			res.write("\n");
-			res.write(buf, function(err) { res.end(); });
+    		}
+		res.write("\n");
+		
+		res.write("1");
+		res.write("\t");
+		res.write("2");
+		
+		
+		
+			res.write("\n", function(err) { res.end(); });
+
 		
 
 		 stream.pipe = function(dest) {
