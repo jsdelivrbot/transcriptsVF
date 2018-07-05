@@ -26,7 +26,6 @@ var now = nowItsTime;
 
 
 
-
 /***************
 
 function exportData(exportObject){
