@@ -1368,15 +1368,14 @@ app.get('/download', function(req, res) {
 
 		
 		
-		var json2xls = require('json2xls');
-		var json = {
+		
+		var xls = {
 		    foo: 'bar',
 		    qux: 'moo',
 		    poo: 123,
 		    stux: new Date()
 		}
 
-		var xls = json2xls(json);
 
 		var buf = Buffer.from(JSON.stringify(xls));
 		// var temp = JSON.parse(buf.toString());
