@@ -1510,10 +1510,14 @@ app.get('/download', function(req, res) {
 			res.write("\t");
     		}
 		res.write("\n");
-		for (var colName in myTrial) {
-        		res.write(myTrial[colName]);
-			res.write("\t");
-    		}
+		for(var i = 0; i < 1000; i++){
+			for (var colName in myTrial) {
+				res.write(myTrial[colName]);
+				res.write("\t");
+			}
+			res.write("\n");
+		}
+		
 		
 		
 		
