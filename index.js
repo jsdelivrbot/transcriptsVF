@@ -1367,25 +1367,23 @@ app.get('/download', function(req, res) {
 		
 
 		
-		
-		
-		var xls = [
-			   {
-			   "id": 1,
-			   "Headline": "Team: Sally Pearson",
-			   "Location": "Austrailia",
-			   "BodyText": "some1",
-			   "Media": "some2"
-			   },
-			   {
-			   "id": 2,
-			   "Headline": "Team: Rebeca Andrade",
-			   "Location": "Brazil",
-			   "BodyText": "some3",
-			   "Media": "some4"
-			   }
-			]
+		var fs = require('fs');
+		var writeStream = fs.createWriteStream("file.xls");
 
+		var header="Sl No"+"\t"+" Age"+"\t"+"Name"+"\n";
+		var row1 = "0"+"\t"+" 21"+"\t"+"Rob"+"\n";
+		var row2 = "1"+"\t"+" 22"+"\t"+"bob"+"\n";
+
+		writeStream.write(header);
+		writeStream.write(row1);
+		writeStream.write(row2);
+
+		writeStream.close();
+		
+		console.log(writeStream);
+		
+
+/***
 
 		var buf = Buffer.from(JSON.stringify(xls));
 		var temp = JSON.parse(buf.toString());
@@ -1405,6 +1403,8 @@ app.get('/download', function(req, res) {
 		 }
 
 		 stream.pipe(res)
+		 
+		 ***////
 
 	}
 	
