@@ -1491,13 +1491,19 @@ app.get('/download', function(req, res) {
 			""
 		 ];
 		
+		
+		
 		var Stream = require('stream')
-		var stream = new Stream();		
+		var stream = new Stream();
+		
 		stream.pipe = function(dest) {
-		  dest.write('0\t1\n2\t3');
-		  return dest;
-		};
 
+		};
+		
+		
+		res.write("0\t1\n");
+		stream.pipe(process.stdout);
+		res.write("2\t3");
 		stream.pipe(process.stdout);
 		
 		 
