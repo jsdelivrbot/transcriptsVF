@@ -1493,23 +1493,7 @@ app.get('/download', function(req, res) {
 		
 		
 		
-		var Stream = require('stream')
-		var stream = new Stream();
-		
-		stream.pipe = function(dest) {
-
-		};
-		
-		
-		res.write("0\t1\n");
-		stream.pipe(res);
-		res.write("2\t3");
-		stream.pipe(res, function(err) { res.end(); });
-		
-		
-		 
-
-/*************************************************************		
+	
 		
 		
 		
@@ -1551,8 +1535,6 @@ app.get('/download', function(req, res) {
 		
 		stream.pipe(res)
 		
-		
-		******************************************************************/
 
 
 	}
