@@ -22,7 +22,8 @@
     "fs": "0.0.1-security",
     "exceljs": "1.5.1",
     "json2csv": "4.1.5",
-    "json2xlsx-export": "1.2.2"
+    "json2xlsx-export": "1.2.2",
+    "json2xls-xml": "0.0.12"
   },
   "repository": {
     "type": "git",
