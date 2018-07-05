@@ -1367,15 +1367,15 @@ app.get('/download', function(req, res) {
 		
 
 		var xls = {
-			[
+			"sheet1": [
 				{"primo": 1, "secondo": 2, "terzo": 3},
 				{"primo": 4, "secondo": 5, "terzo": 6}
 			],
-			[
+			"sheet2": [
 				{"primo": 1, "secondo": 2, "terzo": 3},
 				{"primo": 4, "secondo": 5, "terzo": 6}
 			],
-			[
+			"sheet3": [
 				{"primo": 1, "secondo": 2, "terzo": 3},
 				{"primo": 4, "secondo": 5, "terzo": 6}
 			]	
