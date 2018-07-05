@@ -1366,36 +1366,39 @@ app.get('/download', function(req, res) {
 		*****/
 		
 		
-		const Json2csvParser = require('json2csv').Parser;
-		const fields = ['car', 'price', 'color'];
-		const myCars = [
-		  {
-		    "car": "Audi",
-		    "price": 40000,
-		    "color": "blue"
-		  }, {
-		    "car": "BMW",
-		    "price": 35000,
-		    "color": "black"
-		  }, {
-		    "car": "Porsche",
-		    "price": 60000,
-		    "color": "green"
-		  }
-		];
+		import json2xlsx from 'json2xlsx-export';
  
-		const json2csvParser = new Json2csvParser({ fields });
-		const csv = json2csvParser.parse(myCars);
+			const config = {
+			  filename: 'AwesomeFile',
+			  sheets: [
+			    {
+			      name: 'Sheet1',
+			      data: [
+				[{
+				  value: 'Text1',
+				  type: 'string'
+				},{
+				  value: 'Text2',
+				  type: 'string'
+				}, {
+				  value: 1000,
+				  type: 'number'
+				}]
+			      ]
+			    }
+			  ]
+			};
 
+			var xlsx = json2xlsx(config);
 
 		
 		  var Stream = require('stream')
 		  var stream = new Stream();
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.csv');
+		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xlsx');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(csv, function(err) { res.end(); });
+			res.write(xlsx, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
