@@ -1366,27 +1366,25 @@ app.get('/download', function(req, res) {
 		*****/
 		
 
-		
-		var fs = require('fs');
-		var writeStream = fs.createWriteStream("file.xls");
+		var xls = {
+			[
+				{"primo": 1, "secondo": 2, "terzo": 3},
+				{"primo": 4, "secondo": 5, "terzo": 6}
+			],
+			[
+				{"primo": 1, "secondo": 2, "terzo": 3},
+				{"primo": 4, "secondo": 5, "terzo": 6}
+			],
+			[
+				{"primo": 1, "secondo": 2, "terzo": 3},
+				{"primo": 4, "secondo": 5, "terzo": 6}
+			]	
+			
+		}
 
-		var header="Sl No"+"\t"+" Age"+"\t"+"Name"+"\n";
-		var row1 = "0"+"\t"+" 21"+"\t"+"Rob"+"\n";
-		var row2 = "1"+"\t"+" 22"+"\t"+"bob"+"\n";
-
-		writeStream.write(header);
-		writeStream.write(row1);
-		writeStream.write(row2);
-
-		writeStream.close();
-		
-		console.log(writeStream);
-		
-
-/***
 
 		var buf = Buffer.from(JSON.stringify(xls));
-		var temp = JSON.parse(buf.toString());
+		// var temp = JSON.parse(buf.toString());
 		
 		
 		  var Stream = require('stream')
@@ -1395,7 +1393,7 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(temp, function(err) { res.end(); });
+			res.write(buf, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
@@ -1403,8 +1401,7 @@ app.get('/download', function(req, res) {
 		 }
 
 		 stream.pipe(res)
-		 
-		 ***////
+
 
 	}
 	
