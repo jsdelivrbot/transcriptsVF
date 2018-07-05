@@ -1393,6 +1393,8 @@ app.get('/download', function(req, res) {
 		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
+			res.write("1");
+			res.write("\n");
 			res.write(buf, function(err) { res.end(); });
 		
 
