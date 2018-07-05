@@ -1496,7 +1496,7 @@ app.get('/download', function(req, res) {
 		for (var colName in testTypes) {
 			myFile = myFile + colName + "\t";
     		}
-		file.write("\n");
+		myFile = myFile + "\n";
 		for(var i = 0; i < optionsQuery; i++){
 			var index = myTrial.length;
 			for(var z = 0; z < index; z++){
