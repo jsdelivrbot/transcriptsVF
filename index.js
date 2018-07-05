@@ -1366,29 +1366,36 @@ app.get('/download', function(req, res) {
 		*****/
 		
 		
-		var json2xls = require('json2xls');
-		var jsonArr = [{
-		    foo: 'bar',
-		    qux: 'moo',
-		    poo: 123
-		},
-		{
-		    foo: 'bar',
-		    qux: 'moo',
-		    poo: 345
-		}];
-
-		var xls = json2xls(jsonArr);
+		const Json2csvParser = require('json2csv').Parser;
+		const fields = ['car', 'price', 'color'];
+		const myCars = [
+		  {
+		    "car": "Audi",
+		    "price": 40000,
+		    "color": "blue"
+		  }, {
+		    "car": "BMW",
+		    "price": 35000,
+		    "color": "black"
+		  }, {
+		    "car": "Porsche",
+		    "price": 60000,
+		    "color": "green"
+		  }
+		];
+ 
+		const json2csvParser = new Json2csvParser({ fields });
+		const csv = json2csvParser.parse(myCars);
 
 
 		
 		  var Stream = require('stream')
 		  var stream = new Stream();
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
+		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.csv');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(xls, function(err) { res.end(); });
+			res.write(csv, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
