@@ -17,7 +17,7 @@ var echoAgent = new Agent({
 });
 
 var bearer = "";
-var isBotReady = false;
+var isBotReady = true;  //change me into false
 var dialogs = [];
 var nowItsTime = Date.now();
 var before = (nowItsTime - (1000*60));
