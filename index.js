@@ -1374,15 +1374,15 @@ app.get('/download', function(req, res) {
 			   "id": 1,
 			   "Headline": "Team: Sally Pearson",
 			   "Location": "Austrailia",
-			   "BodyText": "...",
-			   "Media: "..."
+			   "BodyText": "some1",
+			   "Media": "some2"
 			   },
 			   {
 			   "id": 2,
 			   "Headline": "Team: Rebeca Andrade",
 			   "Location": "Brazil",
-			   "BodyText": "...",
-			   "Media: "..."
+			   "BodyText": "some3",
+			   "Media": "some4"
 			   }
 			]
 
