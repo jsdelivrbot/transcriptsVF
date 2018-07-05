@@ -1365,39 +1365,31 @@ app.get('/download', function(req, res) {
 		
 		*****/
 		
-		var json2xlsx = require('json2xlsx-export');
+		var j2xls = require('json2xls-xml')({ pretty : true });
  
-			const config = {
-			  filename: 'AwesomeFile',
-			  sheets: [
-			    {
-			      name: 'Sheet1',
-			      data: [
-				[{
-				  value: 'Text1',
-				  type: 'string'
-				},{
-				  value: 'Text2',
-				  type: 'string'
-				}, {
-				  value: 1000,
-				  type: 'number'
-				}]
-			      ]
-			    }
-			  ]
-			};
+		var doc = {
+		    Foo : [
+			{ firstname : 'John', lastname: 'Doo'}
+			, { firstname : 'Foo', lastname: 'Bar', age: 23, weight: 25.7876, birth : new Date()}
+		    ]
+		    , Bar : [
+			{ firstname : 'Rene', lastname: 'Malin'}
+			, { firstname : 'Foo', lastname: 'foobar', age: 73, weight: 22225.33, birth : new Date()}
+		    ]
+		};
 
-			var xlsx = json2xlsx(config);
-
+		var xls = j2xls(doc);
+		
+		
+		
 		
 		  var Stream = require('stream')
 		  var stream = new Stream();
 
-		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xlsx');
+		  	res.setHeader('Content-disposition', 'attachment; filename=Transcripts.xls');
 			res.setHeader('Content-type', 'application/vnd.ms-excel');
 			// res.charset = 'UTF-8';
-			res.write(xlsx, function(err) { res.end(); });
+			res.write(xls, function(err) { res.end(); });
 		
 
 		 stream.pipe = function(dest) {
