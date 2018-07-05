@@ -1371,16 +1371,16 @@ app.get('/download', function(req, res) {
 		
 		var xls = {
 			[
-				foo: 'bar',
-				qux: 'moo',
-				poo: 123,
-				stux: new Date()
+				'bar',
+				'moo',
+				123,
+				new Date()
 			],
 			[
-				foo: 'bar',
-				qux: 'moo',
-				poo: 123,
-				stux: new Date()
+				'bar',
+				'moo',
+				123,
+				new Date()
 			]
 		    
 		}
