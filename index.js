@@ -1490,9 +1490,17 @@ app.get('/download', function(req, res) {
 			"",
 			""
 		 ];
+		
+		
+		var Readable = require('stream').Readable;
+		var s = new Readable();
+		s._read = function noop() {}; // redundant? see update below
+		s.push('0\t1\n2\t3');
+		s.push(null);
+		
 		 
 
-		
+/*************************************************************		
 		
 		
 		
@@ -1533,6 +1541,9 @@ app.get('/download', function(req, res) {
 		}
 		
 		stream.pipe(res)
+		
+		
+		******************************************************************/
 
 
 	}
