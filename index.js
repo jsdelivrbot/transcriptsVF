@@ -20,7 +20,7 @@ var bearer = "";
 var isBotReady = false;
 var dialogs = [];
 var nowItsTime = Date.now();
-var before = (nowItsTime - (1000*60*60*6));
+var before = (nowItsTime - (1000*60));
 var now = nowItsTime;
 
 
@@ -1194,10 +1194,10 @@ function sortDialogs(){
 			return 0;
 		}
 		dialogs.sort(compare);
-		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*24*3))).length + " elementi");
+		console.log("tengo " + dialogs.filter(element => element.info.startTimeL > (now - (1000*60))).length + " elementi");
 		dialogs = dialogs.filter(element => element.info.startTimeL > (now - (1000*60*60*6)));
 		console.log("piu' vecchio timestamp: " + dialogs[0].info.startTimeL);
-		console.log("max timestamp: " + (now - (1000*60*60*6)));
+		console.log("max timestamp: " + (now - (1000*60)));
 	}
 	updateDialogs();
 	
@@ -1527,17 +1527,12 @@ app.get('/download', function(req, res) {
 		res.write("\t");
 		res.write("2");
 		
-		
-		
-			res.write("\n", function(err) { res.end(); });
-
-		
-
-		 stream.pipe = function(dest) {
+		res.write("\n", function(err) { res.end(); });
+		stream.pipe = function(dest) {
 		 	// dest.write('Hello Dolly')
-		 }
-
-		 stream.pipe(res)
+		}
+		
+		stream.pipe(res)
 
 
 	}
