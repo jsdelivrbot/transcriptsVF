@@ -1370,9 +1370,21 @@ app.get('/download', function(req, res) {
 		
 		
 		var xls = [
-			{ "primo": 1, "secondo": 2 },
-			{ "primo": 3, "secondo": 4 }
-		];
+			   {
+			   "id": 1,
+			   "Headline": "Team: Sally Pearson",
+			   "Location": "Austrailia",
+			   "BodyText": "...",
+			   "Media: "..."
+			   },
+			   {
+			   "id": 2,
+			   "Headline": "Team: Rebeca Andrade",
+			   "Location": "Brazil",
+			   "BodyText": "...",
+			   "Media: "..."
+			   }
+			]
 
 
 		var buf = Buffer.from(JSON.stringify(xls));
