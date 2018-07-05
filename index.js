@@ -1502,10 +1502,10 @@ app.get('/download', function(req, res) {
 		
 		
 		res.write("0\t1\n");
-		stream.pipe(process.stdout);
+		stream.pipe(res);
 		res.write("2\t3");
-		stream.pipe(process.stdout);
-		res.end();
+		stream.pipe(res, function(err) { res.end(); });
+		
 		
 		 
 
