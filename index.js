@@ -1522,6 +1522,8 @@ app.get('/download', function(req, res) {
 			""
 		 ];
 		
+		/**********************************
+		
 		var myFile = "";
 		
 		for (var colName in testTypes) {
@@ -1542,7 +1544,7 @@ app.get('/download', function(req, res) {
 		res.send("ok");
 		
 		
-		/**********************************
+		**********************************/
 		
 		
 		
@@ -1577,6 +1579,12 @@ app.get('/download', function(req, res) {
 		res.write("1");
 		res.write("\t");
 		res.write("2");
+		res.write("\n");
+		
+		console.log(roughSizeOfObject(res));
+		
+		/*
+		
 		
 		res.write("\n", function(err) { res.end(); });
 		stream.pipe = function(dest) {
@@ -1585,10 +1593,9 @@ app.get('/download', function(req, res) {
 		
 		stream.pipe(res)
 		
+		*/
 		
-		
-		
-		***********************************/
+
 		
 
 
