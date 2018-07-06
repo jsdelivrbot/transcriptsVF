@@ -1583,17 +1583,19 @@ app.get('/download', function(req, res) {
 		
 		console.log(roughSizeOfObject(res));
 		
-		/*
+		
 		
 		
 		res.write("\n", function(err) { res.end(); });
 		stream.pipe = function(dest) {
+			
+			console.log(roughSizeOfObject(res));
 		 	// dest.write('Hello Dolly')
 		}
 		
 		stream.pipe(res)
 		
-		*/
+		
 		
 
 		
